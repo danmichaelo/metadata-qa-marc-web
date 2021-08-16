@@ -17,8 +17,8 @@ class Data extends Facetable {
   protected $facetLimit = 10;
   protected $ajaxFacet = 1;
 
-  public function __construct($configuration, $db) {
-    parent::__construct($configuration, $db);
+  public function __construct($config) {
+    parent::__construct($config);
     $this->facet = getOrDefault('facet', '');
     $this->query = getOrDefault('query', '*:*');
     $this->filters = getOrDefault('filters', []);

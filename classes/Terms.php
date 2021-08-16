@@ -7,8 +7,8 @@ class Terms extends Facetable {
 
   private $facet;
 
-  public function __construct($configuration, $db) {
-    parent::__construct($configuration, $db);
+  public function __construct($config) {
+    parent::__construct($config);
     $this->facet = getOrDefault('facet', '');
     $this->query = getOrDefault('query', '*:*');
     $this->scheme = getOrDefault('scheme', '');

@@ -3,10 +3,13 @@ set_time_limit(0);
 
 require_once 'common-functions.php';
 $marcBaseUrl = 'https://www.loc.gov/marc/bibliographic/';
-$configuration = parse_ini_file("configuration.cnf");
 $smarty = createSmarty('templates');
 
-$db = getPath(); // getOrDefault('db', 'bl'); // metadata-qa
+
+require_once 'classes/Config.php';
+$config = new Config();
+
+$db = $config->db;
 
 $tab = getOrDefault('tab', 'completeness');
 $ajax = getOrDefault('ajax', 0, [0, 1]);
@@ -47,13 +50,13 @@ elseif ($tab->getOutputType() == 'html')
   $smarty->display($tab->getTemplate());
 
 function createTab($name) {
-  global $configuration, $db;
+  global $config;
 
   if ($name == 'Classifications' || $name == 'Authorities')
     include_once('classes/AddedEntry.php');
 
   include_once('classes/' . $name . '.php');
-  return new $name($configuration, $db);
+  return new $name($config);
 }
 
 function showMarcUrl($content) {
