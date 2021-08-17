@@ -46,7 +46,7 @@ abstract class BaseTab implements Tab {
   }
 
   private function createCatalogue() {
-    $className = strtoupper(substr($this->catalogueName, 0, 1)) . substr($this->catalogueName, 1);
+    $className = ucfirst(preg_replace('/[^a-zA-Z0-9]/', '', $this->catalogueName));
     require_once 'catalogue/' . $className . '.php';
     return new $className();
   }
